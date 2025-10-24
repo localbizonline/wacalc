@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Service Pricing Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>WhatsApp Service Pricing Calculator</h1>
+            <p class="subtitle">Calculate your messaging costs in real-time</p>
+        </header>
+
+        <div class="calculator-card">
+            <!-- Message Type Selector -->
+            <div class="input-section">
+                <label class="section-label">Message Type</label>
+                <div class="toggle-container">
+                    <button class="toggle-btn active" data-type="marketing" data-rate="0.04">
+                        <span class="toggle-title">Marketing</span>
+                        <span class="toggle-rate">$0.04 per message</span>
+                    </button>
+                    <button class="toggle-btn" data-type="utility" data-rate="0.008">
+                        <span class="toggle-title">Utility</span>
+                        <span class="toggle-rate">$0.008 per message</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Message Quantity Slider -->
+            <div class="input-section">
+                <label class="section-label">
+                    Number of Messages
+                    <span class="current-value" id="quantityDisplay">25,000</span>
+                </label>
+                <input 
+                    type="range" 
+                    id="quantitySlider" 
+                    min="0" 
+                    max="100000" 
+                    value="25000" 
+                    step="100"
+                    class="slider"
+                >
+                <div class="slider-labels">
+                    <span>0</span>
+                    <span>50K</span>
+                    <span>100K</span>
+                </div>
+            </div>
+
+            <!-- Calculation Breakdown -->
+            <div class="breakdown-section">
+                <h3>Pricing Breakdown</h3>
+                <div class="breakdown-row">
+                    <span>Message Type:</span>
+                    <span id="selectedType">Marketing</span>
+                </div>
+                <div class="breakdown-row">
+                    <span>Rate per Message:</span>
+                    <span id="selectedRate">$0.04</span>
+                </div>
+                <div class="breakdown-row">
+                    <span>Number of Messages:</span>
+                    <span id="selectedQuantity">25,000</span>
+                </div>
+                <div class="breakdown-formula">
+                    <span id="formula">$0.04 × 25,000 messages</span>
+                </div>
+            </div>
+
+            <!-- Reset Button -->
+            <button class="reset-btn" id="resetBtn">
+                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                    <path d="M2 8C2 4.686 4.686 2 8 2C11.314 2 14 4.686 14 8C14 11.314 11.314 14 8 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    <path d="M5 11L2 14L5 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                Reset Calculator
+            </button>
+        </div>
+
+        <!-- Total Price Display -->
+        <div class="total-section">
+            <div class="total-label">Total Cost</div>
+            <div class="total-price" id="totalPrice">$1,000.00</div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
