@@ -3,7 +3,8 @@ let state = {
     messageType: 'marketing',
     rate: 0.04,
     quantity: 25000,
-    platformFeeRate: 0.0015
+    platformFeeRate: 0.0015,
+    botQuantity: 10000
 };
 
 // DOM Elements
@@ -17,6 +18,17 @@ const selectedQuantity = document.getElementById('selectedQuantity');
 const messageCost = document.getElementById('messageCost');
 const platformFeeDisplay = document.getElementById('platformFeeDisplay');
 const platformFeeBreakdown = document.getElementById('platformFeeBreakdown');
+const section1Subtotal = document.getElementById('section1Subtotal');
+
+// Section 2 Elements
+const botQuantitySlider = document.getElementById('botQuantitySlider');
+const botQuantityInput = document.getElementById('botQuantityInput');
+const botQuantityDisplay = document.getElementById('botQuantityDisplay');
+const botPlatformFeeDisplay = document.getElementById('botPlatformFeeDisplay');
+const botPlatformFeeBreakdown = document.getElementById('botPlatformFeeBreakdown');
+const botSelectedQuantity = document.getElementById('botSelectedQuantity');
+const section2Subtotal = document.getElementById('section2Subtotal');
+
 const formula = document.getElementById('formula');
 const totalPrice = document.getElementById('totalPrice');
 const resetBtn = document.getElementById('resetBtn');
@@ -37,37 +49,58 @@ function updateSliderBackground() {
     quantitySlider.style.background = `linear-gradient(to right, var(--primary-color) 0%, var(--primary-color) ${percentage}%, var(--border-color) ${percentage}%, var(--border-color) 100%)`;
 }
 
+function updateBotSliderBackground() {
+    const percentage = (state.botQuantity / 100000) * 100;
+    botQuantitySlider.style.background = `linear-gradient(to right, var(--primary-color) 0%, var(--primary-color) ${percentage}%, var(--border-color) ${percentage}%, var(--border-color) 100%)`;
+}
+
 // Calculate and update display
 function updateCalculation() {
+    // Section 1 calculations
     const messagesCost = state.rate * state.quantity;
     const platformFee = state.platformFeeRate * state.quantity;
-    const total = messagesCost + platformFee;
+    const section1Total = messagesCost + platformFee;
     
-    // Update displays
+    // Section 2 calculations
+    const botPlatformFee = state.platformFeeRate * state.botQuantity;
+    const section2Total = botPlatformFee;
+    
+    // Grand total
+    const grandTotal = section1Total + section2Total;
+    
+    // Update Section 1 displays
     quantityDisplay.textContent = formatNumber(state.quantity);
     quantityInput.value = state.quantity;
     selectedType.textContent = state.messageType.charAt(0).toUpperCase() + state.messageType.slice(1);
     selectedRate.textContent = formatCurrency(state.rate);
     selectedQuantity.textContent = formatNumber(state.quantity);
     messageCost.textContent = formatCurrency(messagesCost);
-    
-    // Update platform fee displays
     platformFeeDisplay.textContent = formatCurrency(platformFee);
     platformFeeBreakdown.textContent = formatCurrency(platformFee);
+    section1Subtotal.textContent = formatCurrency(section1Total);
+    
+    // Update Section 2 displays
+    botQuantityDisplay.textContent = formatNumber(state.botQuantity);
+    botQuantityInput.value = state.botQuantity;
+    botPlatformFeeDisplay.textContent = formatCurrency(botPlatformFee);
+    botPlatformFeeBreakdown.textContent = formatCurrency(botPlatformFee);
+    botSelectedQuantity.textContent = formatNumber(state.botQuantity);
+    section2Subtotal.textContent = formatCurrency(section2Total);
     
     // Update formula
-    formula.textContent = `${formatCurrency(messagesCost)} + ${formatCurrency(platformFee)}`;
+    formula.textContent = `${formatCurrency(section1Total)} + ${formatCurrency(section2Total)}`;
     
     // Update total with animation
     totalPrice.classList.add('pulse');
-    totalPrice.textContent = formatCurrency(total);
+    totalPrice.textContent = formatCurrency(grandTotal);
     
     setTimeout(() => {
         totalPrice.classList.remove('pulse');
     }, 500);
     
-    // Update slider background
+    // Update slider backgrounds
     updateSliderBackground();
+    updateBotSliderBackground();
 }
 
 // Event Listeners
@@ -121,6 +154,37 @@ quantityInput.addEventListener('blur', function() {
     }
 });
 
+// Section 2: Bot quantity slider
+botQuantitySlider.addEventListener('input', function() {
+    state.botQuantity = parseInt(this.value);
+    updateCalculation();
+});
+
+// Section 2: Bot quantity input field
+botQuantityInput.addEventListener('input', function() {
+    let value = parseInt(this.value) || 0;
+    
+    // Validate and constrain the value
+    if (value < 0) value = 0;
+    if (value > 100000) value = 100000;
+    
+    // Update state and slider
+    state.botQuantity = value;
+    botQuantitySlider.value = value;
+    
+    updateCalculation();
+});
+
+// Section 2: Handle blur event
+botQuantityInput.addEventListener('blur', function() {
+    if (this.value === '' || parseInt(this.value) < 0) {
+        this.value = 0;
+        state.botQuantity = 0;
+        botQuantitySlider.value = 0;
+        updateCalculation();
+    }
+});
+
 // Reset button
 resetBtn.addEventListener('click', function() {
     // Reset to default values
@@ -128,7 +192,8 @@ resetBtn.addEventListener('click', function() {
         messageType: 'marketing',
         rate: 0.04,
         quantity: 25000,
-        platformFeeRate: 0.0015
+        platformFeeRate: 0.0015,
+        botQuantity: 10000
     };
     
     // Reset UI
@@ -142,6 +207,8 @@ resetBtn.addEventListener('click', function() {
     
     quantitySlider.value = 25000;
     quantityInput.value = 25000;
+    botQuantitySlider.value = 10000;
+    botQuantityInput.value = 10000;
     
     // Update display with a slight animation
     this.style.transform = 'scale(0.95)';

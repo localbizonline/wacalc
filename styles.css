@@ -288,8 +288,26 @@ header h1 {
 .breakdown-section h3 {
     font-size: 18px;
     font-weight: 600;
-    margin-bottom: 20px;
+    margin-bottom: 24px;
     color: var(--text-primary);
+}
+
+.breakdown-subsection {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.breakdown-subsection:last-of-type {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.breakdown-subsection h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--secondary-color);
+    margin-bottom: 16px;
 }
 
 .breakdown-row {
@@ -303,6 +321,21 @@ header h1 {
 .breakdown-row span:last-child {
     font-weight: 600;
     color: var(--text-primary);
+}
+
+.breakdown-subtotal {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--background);
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.breakdown-subtotal span:last-child {
+    color: var(--primary-color);
 }
 
 .breakdown-formula {
