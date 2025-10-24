@@ -13,10 +13,13 @@
             <p class="subtitle">Calculate your messaging costs in real-time</p>
         </header>
 
-        <div class="calculator-card">
-            <div class="section-header">
-                <h2>Section 1: META Pricing</h2>
-            </div>
+        <div class="calculator-layout">
+            <!-- Left Column: Sections -->
+            <div class="left-column">
+                <div class="calculator-card">
+                    <div class="section-header">
+                        <h2>Section 1: META Pricing</h2>
+                    </div>
 
             <!-- Message Quantity Input -->
             <div class="input-section">
@@ -70,32 +73,32 @@
                 </div>
             </div>
 
-            <!-- Platform Fee Display -->
+            <!-- Reachmax Platform Fee Display -->
             <div class="platform-fee-section">
                 <div class="fee-row">
                     <div class="fee-label">
-                        <span class="fee-title">Platform Fee</span>
+                        <span class="fee-title">Reachmax Platform Fee</span>
                         <span class="fee-rate">$0.0015 per message</span>
                     </div>
                     <div class="fee-value" id="platformFeeDisplay">$37.50</div>
                 </div>
             </div>
 
-            <!-- Reset Button -->
-            <button class="reset-btn" id="resetBtn">
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                    <path d="M2 8C2 4.686 4.686 2 8 2C11.314 2 14 4.686 14 8C14 11.314 11.314 14 8 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M5 11L2 14L5 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                Reset Calculator
-            </button>
-        </div>
+                    <!-- Reset Button -->
+                    <button class="reset-btn" id="resetBtn">
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M2 8C2 4.686 4.686 2 8 2C11.314 2 14 4.686 14 8C14 11.314 11.314 14 8 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                            <path d="M5 11L2 14L5 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        Reset Calculator
+                    </button>
+                </div>
 
-        <!-- Section 2: Bot/Live Responses -->
-        <div class="calculator-card">
-            <div class="section-header">
-                <h2>Section 2: Bot/Live Responses</h2>
-            </div>
+                <!-- Section 2: Bot/Live Responses -->
+                <div class="calculator-card">
+                    <div class="section-header">
+                        <h2>Section 2: Bot/Live Responses</h2>
+                    </div>
 
             <!-- Bot Message Quantity Input -->
             <div class="input-section">
@@ -134,78 +137,83 @@
                 </div>
             </div>
 
-            <!-- Bot Platform Fee Display -->
-            <div class="platform-fee-section">
-                <div class="fee-row">
-                    <div class="fee-label">
-                        <span class="fee-title">Platform Fee</span>
-                        <span class="fee-rate">$0.0015 per message</span>
+                    <!-- Reachmax Platform Fee Display -->
+                    <div class="platform-fee-section">
+                        <div class="fee-row">
+                            <div class="fee-label">
+                                <span class="fee-title">Reachmax Platform Fee</span>
+                                <span class="fee-rate">$0.0015 per message</span>
+                            </div>
+                            <div class="fee-value" id="botPlatformFeeDisplay">$15.00</div>
+                        </div>
                     </div>
-                    <div class="fee-value" id="botPlatformFeeDisplay">$15.00</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Total Price Display -->
-        <div class="total-section">
-            <div class="total-label">Total Cost</div>
-            <div class="total-price" id="totalPrice">$1,052.50</div>
-            <div class="total-price-zar" id="totalPriceZAR">R18,945.00</div>
-            <div class="exchange-rate-note">Exchange rate: $1 = R18</div>
-        </div>
-
-        <!-- Pricing Breakdown -->
-        <div class="breakdown-section">
-            <h3>Pricing Breakdown</h3>
-            
-            <!-- Section 1 Breakdown -->
-            <div class="breakdown-subsection">
-                <h4>Section 1: META Pricing</h4>
-                <div class="breakdown-row">
-                    <span>Number of Messages:</span>
-                    <span id="selectedQuantity">25,000</span>
-                </div>
-                <div class="breakdown-row">
-                    <span>Message Type:</span>
-                    <span id="selectedType">Marketing</span>
-                </div>
-                <div class="breakdown-row">
-                    <span>Message Rate:</span>
-                    <span id="selectedRate">$0.04</span>
-                </div>
-                <div class="breakdown-row">
-                    <span>Message Cost:</span>
-                    <span id="messageCost">$1,000.00</span>
-                </div>
-                <div class="breakdown-row">
-                    <span>Platform Fee:</span>
-                    <span id="platformFeeBreakdown">$37.50</span>
-                </div>
-                <div class="breakdown-subtotal">
-                    <span>Section 1 Subtotal:</span>
-                    <span id="section1Subtotal">$1,037.50</span>
                 </div>
             </div>
 
-            <!-- Section 2 Breakdown -->
-            <div class="breakdown-subsection">
-                <h4>Section 2: Bot/Live Responses</h4>
-                <div class="breakdown-row">
-                    <span>Number of Messages:</span>
-                    <span id="botSelectedQuantity">10,000</span>
+            <!-- Right Column: Total & Breakdown -->
+            <div class="right-column">
+                <!-- Total Price Display -->
+                <div class="total-section">
+                    <div class="total-label">Total Cost</div>
+                    <div class="total-price" id="totalPrice">$1,052.50</div>
+                    <div class="total-price-zar" id="totalPriceZAR">R18,945.00</div>
+                    <div class="exchange-rate-note">Exchange rate: $1 = R18</div>
                 </div>
-                <div class="breakdown-row">
-                    <span>Platform Fee:</span>
-                    <span id="botPlatformFeeBreakdown">$15.00</span>
-                </div>
-                <div class="breakdown-subtotal">
-                    <span>Section 2 Subtotal:</span>
-                    <span id="section2Subtotal">$15.00</span>
-                </div>
-            </div>
 
-            <div class="breakdown-formula">
-                <span id="formula">$1,037.50 + $15.00</span>
+                <!-- Pricing Breakdown -->
+                <div class="breakdown-section">
+                    <h3>Pricing Breakdown</h3>
+                    
+                    <!-- Section 1 Breakdown -->
+                    <div class="breakdown-subsection">
+                        <h4>Section 1: META Pricing</h4>
+                        <div class="breakdown-row">
+                            <span>Number of Messages:</span>
+                            <span id="selectedQuantity">25,000</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Message Type:</span>
+                            <span id="selectedType">Marketing</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Message Rate:</span>
+                            <span id="selectedRate">$0.04</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Message Cost:</span>
+                            <span id="messageCost">$1,000.00</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Reachmax Platform Fee:</span>
+                            <span id="platformFeeBreakdown">$37.50</span>
+                        </div>
+                        <div class="breakdown-subtotal">
+                            <span>Section 1 Subtotal:</span>
+                            <span id="section1Subtotal">$1,037.50</span>
+                        </div>
+                    </div>
+
+                    <!-- Section 2 Breakdown -->
+                    <div class="breakdown-subsection">
+                        <h4>Section 2: Bot/Live Responses</h4>
+                        <div class="breakdown-row">
+                            <span>Number of Messages:</span>
+                            <span id="botSelectedQuantity">10,000</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Reachmax Platform Fee:</span>
+                            <span id="botPlatformFeeBreakdown">$15.00</span>
+                        </div>
+                        <div class="breakdown-subtotal">
+                            <span>Section 2 Subtotal:</span>
+                            <span id="section2Subtotal">$15.00</span>
+                        </div>
+                    </div>
+
+                    <div class="breakdown-formula">
+                        <span id="formula">$1,037.50 + $15.00</span>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
