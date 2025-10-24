@@ -4,6 +4,7 @@ let state = {
     rate: 0.04,
     quantity: 25000,
     platformFeeRate: 0.0015,
+    metaAdminFeeRate: 0.02, // META admin fee when using our account
     botQuantity: 10000,
     managementFee: 0,
     managementPackage: 'None',
@@ -20,6 +21,8 @@ const selectedType = document.getElementById('selectedType');
 const selectedRate = document.getElementById('selectedRate');
 const selectedQuantity = document.getElementById('selectedQuantity');
 const messageCost = document.getElementById('messageCost');
+const metaAdminFeeBreakdown = document.getElementById('metaAdminFeeBreakdown');
+const metaAdminFeeRow = document.getElementById('metaAdminFeeRow');
 const platformFeeDisplay = document.getElementById('platformFeeDisplay');
 const platformFeeBreakdown = document.getElementById('platformFeeBreakdown');
 const section1Subtotal = document.getElementById('section1Subtotal');
@@ -73,10 +76,11 @@ function updateBotSliderBackground() {
 function updateCalculation() {
     // Section 1 calculations
     const messagesCost = state.rate * state.quantity;
+    const metaAdminFee = state.metaAdminFeeRate * state.quantity;
     const platformFee = state.platformFeeRate * state.quantity;
     
-    // If using own META account, exclude message cost from total
-    const section1Total = state.ownMetaAccount ? platformFee : (messagesCost + platformFee);
+    // If using own META account, exclude message cost and admin fee from total
+    const section1Total = state.ownMetaAccount ? platformFee : (messagesCost + metaAdminFee + platformFee);
     
     // Section 2 calculations
     const botPlatformFee = state.platformFeeRate * state.botQuantity;
@@ -95,6 +99,15 @@ function updateCalculation() {
     selectedRate.textContent = formatCurrency(state.rate);
     selectedQuantity.textContent = formatNumber(state.quantity);
     messageCost.textContent = formatCurrency(messagesCost);
+    
+    // Show/hide META admin fee based on own account checkbox
+    if (state.ownMetaAccount) {
+        metaAdminFeeRow.style.display = 'none';
+    } else {
+        metaAdminFeeRow.style.display = 'flex';
+        metaAdminFeeBreakdown.textContent = formatCurrency(metaAdminFee);
+    }
+    
     platformFeeDisplay.textContent = formatCurrency(platformFee);
     platformFeeBreakdown.textContent = formatCurrency(platformFee);
     section1Subtotal.textContent = formatCurrency(section1Total);
@@ -249,6 +262,7 @@ resetBtn.addEventListener('click', function() {
         rate: 0.04,
         quantity: 0,
         platformFeeRate: 0.0015,
+        metaAdminFeeRate: 0.02,
         botQuantity: 0,
         managementFee: 0,
         managementPackage: 'None',
