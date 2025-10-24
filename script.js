@@ -4,7 +4,7 @@ let state = {
     rate: 0.04,
     quantity: 25000,
     platformFeeRate: 0.0015,
-    metaAdminFeeRate: 0.02, // META admin fee when using our account
+    metaAdminFeeRate: 0.10, // META admin fee: 10% of message cost
     botQuantity: 10000,
     managementFee: 0,
     managementPackage: 'None',
@@ -76,7 +76,7 @@ function updateBotSliderBackground() {
 function updateCalculation() {
     // Section 1 calculations
     const messagesCost = state.rate * state.quantity;
-    const metaAdminFee = state.metaAdminFeeRate * state.quantity;
+    const metaAdminFee = messagesCost * state.metaAdminFeeRate; // 10% of message cost
     const platformFee = state.platformFeeRate * state.quantity;
     
     // If using own META account, exclude message cost and admin fee from total
@@ -262,7 +262,7 @@ resetBtn.addEventListener('click', function() {
         rate: 0.04,
         quantity: 0,
         platformFeeRate: 0.0015,
-        metaAdminFeeRate: 0.02,
+        metaAdminFeeRate: 0.10,
         botQuantity: 0,
         managementFee: 0,
         managementPackage: 'None',
