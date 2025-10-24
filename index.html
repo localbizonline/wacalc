@@ -73,25 +73,16 @@
                 </div>
             </div>
 
-            <!-- Reachmax Platform Fee Display -->
-            <div class="platform-fee-section">
-                <div class="fee-row">
-                    <div class="fee-label">
-                        <span class="fee-title">Reachmax Platform Fee</span>
-                        <span class="fee-rate">$0.0015 per message</span>
+                    <!-- Reachmax Platform Fee Display -->
+                    <div class="platform-fee-section">
+                        <div class="fee-row">
+                            <div class="fee-label">
+                                <span class="fee-title">Reachmax Platform Fee</span>
+                                <span class="fee-rate">$0.0015 per message</span>
+                            </div>
+                            <div class="fee-value" id="platformFeeDisplay">$37.50</div>
+                        </div>
                     </div>
-                    <div class="fee-value" id="platformFeeDisplay">$37.50</div>
-                </div>
-            </div>
-
-                    <!-- Reset Button -->
-                    <button class="reset-btn" id="resetBtn">
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M2 8C2 4.686 4.686 2 8 2C11.314 2 14 4.686 14 8C14 11.314 11.314 14 8 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
-                            <path d="M5 11L2 14L5 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                        Reset Calculator
-                    </button>
                 </div>
 
                 <!-- Section 2: Bot/Live Responses -->
@@ -145,6 +136,34 @@
                                 <span class="fee-rate">$0.0015 per message</span>
                             </div>
                             <div class="fee-value" id="botPlatformFeeDisplay">$15.00</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Section 3: Monthly Management Fee -->
+                <div class="calculator-card">
+                    <div class="section-header">
+                        <h2>Section 3: Monthly Management Fee</h2>
+                    </div>
+
+                    <!-- Management Package Selection -->
+                    <div class="input-section">
+                        <label class="section-label">Select Package</label>
+                        <select id="managementPackageSelect" class="package-select">
+                            <option value="0">None</option>
+                            <option value="90">WhatsApp API Only - $90/month</option>
+                            <option value="170">Reachmax Platform - $170/month</option>
+                        </select>
+                    </div>
+
+                    <!-- Management Fee Display -->
+                    <div class="platform-fee-section">
+                        <div class="fee-row">
+                            <div class="fee-label">
+                                <span class="fee-title">Monthly Management Fee</span>
+                                <span class="fee-rate" id="managementPackageName">None selected</span>
+                            </div>
+                            <div class="fee-value" id="managementFeeDisplay">$0.00</div>
                         </div>
                     </div>
                 </div>
@@ -210,10 +229,36 @@
                         </div>
                     </div>
 
+                    <!-- Section 3 Breakdown -->
+                    <div class="breakdown-subsection">
+                        <h4>Section 3: Monthly Management Fee</h4>
+                        <div class="breakdown-row">
+                            <span>Package:</span>
+                            <span id="selectedPackage">None</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Monthly Fee:</span>
+                            <span id="managementFeeBreakdown">$0.00</span>
+                        </div>
+                        <div class="breakdown-subtotal">
+                            <span>Section 3 Subtotal:</span>
+                            <span id="section3Subtotal">$0.00</span>
+                        </div>
+                    </div>
+
                     <div class="breakdown-formula">
-                        <span id="formula">$1,037.50 + $15.00</span>
+                        <span id="formula">$1,037.50 + $15.00 + $0.00</span>
                     </div>
                 </div>
+
+                <!-- Reset Button -->
+                <button class="reset-btn" id="resetBtn">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M2 8C2 4.686 4.686 2 8 2C11.314 2 14 4.686 14 8C14 11.314 11.314 14 8 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <path d="M5 11L2 14L5 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Reset Calculator
+                </button>
             </div>
         </div>
     </div>

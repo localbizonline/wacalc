@@ -5,6 +5,8 @@ let state = {
     quantity: 25000,
     platformFeeRate: 0.0015,
     botQuantity: 10000,
+    managementFee: 0,
+    managementPackage: 'None',
     exchangeRate: 18 // USD to ZAR
 };
 
@@ -29,6 +31,14 @@ const botPlatformFeeDisplay = document.getElementById('botPlatformFeeDisplay');
 const botPlatformFeeBreakdown = document.getElementById('botPlatformFeeBreakdown');
 const botSelectedQuantity = document.getElementById('botSelectedQuantity');
 const section2Subtotal = document.getElementById('section2Subtotal');
+
+// Section 3 Elements
+const managementPackageSelect = document.getElementById('managementPackageSelect');
+const managementFeeDisplay = document.getElementById('managementFeeDisplay');
+const managementFeeBreakdown = document.getElementById('managementFeeBreakdown');
+const managementPackageName = document.getElementById('managementPackageName');
+const selectedPackage = document.getElementById('selectedPackage');
+const section3Subtotal = document.getElementById('section3Subtotal');
 
 const formula = document.getElementById('formula');
 const totalPrice = document.getElementById('totalPrice');
@@ -68,8 +78,11 @@ function updateCalculation() {
     const botPlatformFee = state.platformFeeRate * state.botQuantity;
     const section2Total = botPlatformFee;
     
+    // Section 3 calculations
+    const section3Total = state.managementFee;
+    
     // Grand total
-    const grandTotal = section1Total + section2Total;
+    const grandTotal = section1Total + section2Total + section3Total;
     
     // Update Section 1 displays
     quantityDisplay.textContent = formatNumber(state.quantity);
@@ -90,8 +103,14 @@ function updateCalculation() {
     botSelectedQuantity.textContent = formatNumber(state.botQuantity);
     section2Subtotal.textContent = formatCurrency(section2Total);
     
+    // Update Section 3 displays
+    managementFeeDisplay.textContent = formatCurrency(state.managementFee);
+    managementFeeBreakdown.textContent = formatCurrency(state.managementFee);
+    selectedPackage.textContent = state.managementPackage;
+    section3Subtotal.textContent = formatCurrency(section3Total);
+    
     // Update formula
-    formula.textContent = `${formatCurrency(section1Total)} + ${formatCurrency(section2Total)}`;
+    formula.textContent = `${formatCurrency(section1Total)} + ${formatCurrency(section2Total)} + ${formatCurrency(section3Total)}`;
     
     // Calculate ZAR amount
     const grandTotalZAR = grandTotal * state.exchangeRate;
@@ -192,6 +211,26 @@ botQuantityInput.addEventListener('blur', function() {
     }
 });
 
+// Section 3: Management package dropdown
+managementPackageSelect.addEventListener('change', function() {
+    const selectedValue = parseFloat(this.value);
+    state.managementFee = selectedValue;
+    
+    // Update package name
+    if (selectedValue === 0) {
+        state.managementPackage = 'None';
+        managementPackageName.textContent = 'None selected';
+    } else if (selectedValue === 90) {
+        state.managementPackage = 'WhatsApp API Only';
+        managementPackageName.textContent = '$90/month';
+    } else if (selectedValue === 170) {
+        state.managementPackage = 'Reachmax Platform';
+        managementPackageName.textContent = '$170/month';
+    }
+    
+    updateCalculation();
+});
+
 // Reset button
 resetBtn.addEventListener('click', function() {
     // Reset to default values
@@ -201,6 +240,8 @@ resetBtn.addEventListener('click', function() {
         quantity: 25000,
         platformFeeRate: 0.0015,
         botQuantity: 10000,
+        managementFee: 0,
+        managementPackage: 'None',
         exchangeRate: 18
     };
     
@@ -217,6 +258,8 @@ resetBtn.addEventListener('click', function() {
     quantityInput.value = 25000;
     botQuantitySlider.value = 10000;
     botQuantityInput.value = 10000;
+    managementPackageSelect.value = '0';
+    managementPackageName.textContent = 'None selected';
     
     // Update display with a slight animation
     this.style.transform = 'scale(0.95)';
