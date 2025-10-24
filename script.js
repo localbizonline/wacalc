@@ -237,9 +237,9 @@ resetBtn.addEventListener('click', function() {
     state = {
         messageType: 'marketing',
         rate: 0.04,
-        quantity: 25000,
+        quantity: 0,
         platformFeeRate: 0.0015,
-        botQuantity: 10000,
+        botQuantity: 0,
         managementFee: 0,
         managementPackage: 'None',
         exchangeRate: 18
@@ -254,10 +254,10 @@ resetBtn.addEventListener('click', function() {
         }
     });
     
-    quantitySlider.value = 25000;
-    quantityInput.value = 25000;
-    botQuantitySlider.value = 10000;
-    botQuantityInput.value = 10000;
+    quantitySlider.value = 0;
+    quantityInput.value = 0;
+    botQuantitySlider.value = 0;
+    botQuantityInput.value = 0;
     managementPackageSelect.value = '0';
     managementPackageName.textContent = 'None selected';
     
