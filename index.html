@@ -14,22 +14,7 @@
         </header>
 
         <div class="calculator-card">
-            <!-- Message Type Selector -->
-            <div class="input-section">
-                <label class="section-label">Message Type</label>
-                <div class="toggle-container">
-                    <button class="toggle-btn active" data-type="marketing" data-rate="0.04">
-                        <span class="toggle-title">Marketing</span>
-                        <span class="toggle-rate">$0.04 per message</span>
-                    </button>
-                    <button class="toggle-btn" data-type="utility" data-rate="0.008">
-                        <span class="toggle-title">Utility</span>
-                        <span class="toggle-rate">$0.008 per message</span>
-                    </button>
-                </div>
-            </div>
-
-            <!-- Message Quantity Slider -->
+            <!-- 1. Message Quantity Input -->
             <div class="input-section">
                 <label class="section-label">
                     Number of Messages
@@ -66,23 +51,18 @@
                 </div>
             </div>
 
-            <!-- Calculation Breakdown -->
-            <div class="breakdown-section">
-                <h3>Pricing Breakdown</h3>
-                <div class="breakdown-row">
-                    <span>Message Type:</span>
-                    <span id="selectedType">Marketing</span>
-                </div>
-                <div class="breakdown-row">
-                    <span>Rate per Message:</span>
-                    <span id="selectedRate">$0.04</span>
-                </div>
-                <div class="breakdown-row">
-                    <span>Number of Messages:</span>
-                    <span id="selectedQuantity">25,000</span>
-                </div>
-                <div class="breakdown-formula">
-                    <span id="formula">$0.04 × 25,000 messages</span>
+            <!-- 2. Message Type Selector -->
+            <div class="input-section">
+                <label class="section-label">Message Type</label>
+                <div class="toggle-container">
+                    <button class="toggle-btn active" data-type="marketing" data-rate="0.04">
+                        <span class="toggle-title">Marketing</span>
+                        <span class="toggle-rate">$0.04 per message</span>
+                    </button>
+                    <button class="toggle-btn" data-type="utility" data-rate="0.008">
+                        <span class="toggle-title">Utility</span>
+                        <span class="toggle-rate">$0.008 per message</span>
+                    </button>
                 </div>
             </div>
 
@@ -100,6 +80,26 @@
         <div class="total-section">
             <div class="total-label">Total Cost</div>
             <div class="total-price" id="totalPrice">$1,000.00</div>
+        </div>
+
+        <!-- Pricing Breakdown -->
+        <div class="breakdown-section">
+            <h3>Pricing Breakdown</h3>
+            <div class="breakdown-row">
+                <span>Message Type:</span>
+                <span id="selectedType">Marketing</span>
+            </div>
+            <div class="breakdown-row">
+                <span>Rate per Message:</span>
+                <span id="selectedRate">$0.04</span>
+            </div>
+            <div class="breakdown-row">
+                <span>Number of Messages:</span>
+                <span id="selectedQuantity">25,000</span>
+            </div>
+            <div class="breakdown-formula">
+                <span id="formula">$0.04 × 25,000 messages</span>
+            </div>
         </div>
     </div>
 
