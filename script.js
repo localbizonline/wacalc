@@ -2,7 +2,8 @@
 let state = {
     messageType: 'marketing',
     rate: 0.04,
-    quantity: 25000
+    quantity: 25000,
+    platformFeeRate: 0.0015
 };
 
 // DOM Elements
@@ -13,6 +14,9 @@ const quantityDisplay = document.getElementById('quantityDisplay');
 const selectedType = document.getElementById('selectedType');
 const selectedRate = document.getElementById('selectedRate');
 const selectedQuantity = document.getElementById('selectedQuantity');
+const messageCost = document.getElementById('messageCost');
+const platformFeeDisplay = document.getElementById('platformFeeDisplay');
+const platformFeeBreakdown = document.getElementById('platformFeeBreakdown');
 const formula = document.getElementById('formula');
 const totalPrice = document.getElementById('totalPrice');
 const resetBtn = document.getElementById('resetBtn');
@@ -35,7 +39,9 @@ function updateSliderBackground() {
 
 // Calculate and update display
 function updateCalculation() {
-    const total = state.rate * state.quantity;
+    const messagesCost = state.rate * state.quantity;
+    const platformFee = state.platformFeeRate * state.quantity;
+    const total = messagesCost + platformFee;
     
     // Update displays
     quantityDisplay.textContent = formatNumber(state.quantity);
@@ -43,7 +49,14 @@ function updateCalculation() {
     selectedType.textContent = state.messageType.charAt(0).toUpperCase() + state.messageType.slice(1);
     selectedRate.textContent = formatCurrency(state.rate);
     selectedQuantity.textContent = formatNumber(state.quantity);
-    formula.textContent = `${formatCurrency(state.rate)} × ${formatNumber(state.quantity)} messages`;
+    messageCost.textContent = formatCurrency(messagesCost);
+    
+    // Update platform fee displays
+    platformFeeDisplay.textContent = formatCurrency(platformFee);
+    platformFeeBreakdown.textContent = formatCurrency(platformFee);
+    
+    // Update formula
+    formula.textContent = `${formatCurrency(messagesCost)} + ${formatCurrency(platformFee)}`;
     
     // Update total with animation
     totalPrice.classList.add('pulse');
@@ -114,7 +127,8 @@ resetBtn.addEventListener('click', function() {
     state = {
         messageType: 'marketing',
         rate: 0.04,
-        quantity: 25000
+        quantity: 25000,
+        platformFeeRate: 0.0015
     };
     
     // Reset UI

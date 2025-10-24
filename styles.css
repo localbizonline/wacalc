@@ -68,6 +68,19 @@ header h1 {
     margin-bottom: 24px;
 }
 
+.section-header {
+    margin-bottom: 28px;
+    padding-bottom: 20px;
+    border-bottom: 2px solid var(--background);
+}
+
+.section-header h2 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
 .input-section {
     margin-bottom: 36px;
 }
@@ -224,6 +237,43 @@ header h1 {
     color: var(--text-secondary);
     font-size: 13px;
     margin-top: 8px;
+}
+
+/* Platform Fee Section */
+.platform-fee-section {
+    background: var(--background);
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 24px;
+}
+
+.fee-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.fee-label {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.fee-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.fee-rate {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.fee-value {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--primary-color);
 }
 
 /* Breakdown Section */

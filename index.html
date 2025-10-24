@@ -14,7 +14,11 @@
         </header>
 
         <div class="calculator-card">
-            <!-- 1. Message Quantity Input -->
+            <div class="section-header">
+                <h2>Section 1: META Pricing</h2>
+            </div>
+
+            <!-- Message Quantity Input -->
             <div class="input-section">
                 <label class="section-label">
                     Number of Messages
@@ -51,7 +55,7 @@
                 </div>
             </div>
 
-            <!-- 2. Message Type Selector -->
+            <!-- Message Type Selector -->
             <div class="input-section">
                 <label class="section-label">Message Type</label>
                 <div class="toggle-container">
@@ -63,6 +67,17 @@
                         <span class="toggle-title">Utility</span>
                         <span class="toggle-rate">$0.008 per message</span>
                     </button>
+                </div>
+            </div>
+
+            <!-- Platform Fee Display -->
+            <div class="platform-fee-section">
+                <div class="fee-row">
+                    <div class="fee-label">
+                        <span class="fee-title">Platform Fee</span>
+                        <span class="fee-rate">$0.0015 per message</span>
+                    </div>
+                    <div class="fee-value" id="platformFeeDisplay">$37.50</div>
                 </div>
             </div>
 
@@ -86,19 +101,27 @@
         <div class="breakdown-section">
             <h3>Pricing Breakdown</h3>
             <div class="breakdown-row">
+                <span>Number of Messages:</span>
+                <span id="selectedQuantity">25,000</span>
+            </div>
+            <div class="breakdown-row">
                 <span>Message Type:</span>
                 <span id="selectedType">Marketing</span>
             </div>
             <div class="breakdown-row">
-                <span>Rate per Message:</span>
+                <span>Message Rate:</span>
                 <span id="selectedRate">$0.04</span>
             </div>
             <div class="breakdown-row">
-                <span>Number of Messages:</span>
-                <span id="selectedQuantity">25,000</span>
+                <span>Message Cost:</span>
+                <span id="messageCost">$1,000.00</span>
+            </div>
+            <div class="breakdown-row">
+                <span>Platform Fee:</span>
+                <span id="platformFeeBreakdown">$37.50</span>
             </div>
             <div class="breakdown-formula">
-                <span id="formula">$0.04 × 25,000 messages</span>
+                <span id="formula">Message Cost + Platform Fee</span>
             </div>
         </div>
     </div>
