@@ -8,6 +8,7 @@ let state = {
 // DOM Elements
 const toggleButtons = document.querySelectorAll('.toggle-btn');
 const quantitySlider = document.getElementById('quantitySlider');
+const quantityInput = document.getElementById('quantityInput');
 const quantityDisplay = document.getElementById('quantityDisplay');
 const selectedType = document.getElementById('selectedType');
 const selectedRate = document.getElementById('selectedRate');
@@ -38,6 +39,7 @@ function updateCalculation() {
     
     // Update displays
     quantityDisplay.textContent = formatNumber(state.quantity);
+    quantityInput.value = state.quantity;
     selectedType.textContent = state.messageType.charAt(0).toUpperCase() + state.messageType.slice(1);
     selectedRate.textContent = formatCurrency(state.rate);
     selectedQuantity.textContent = formatNumber(state.quantity);
@@ -81,6 +83,31 @@ quantitySlider.addEventListener('input', function() {
     updateCalculation();
 });
 
+// Quantity input field
+quantityInput.addEventListener('input', function() {
+    let value = parseInt(this.value) || 0;
+    
+    // Validate and constrain the value
+    if (value < 0) value = 0;
+    if (value > 100000) value = 100000;
+    
+    // Update state and slider
+    state.quantity = value;
+    quantitySlider.value = value;
+    
+    updateCalculation();
+});
+
+// Also handle blur event to ensure valid value when user leaves the field
+quantityInput.addEventListener('blur', function() {
+    if (this.value === '' || parseInt(this.value) < 0) {
+        this.value = 0;
+        state.quantity = 0;
+        quantitySlider.value = 0;
+        updateCalculation();
+    }
+});
+
 // Reset button
 resetBtn.addEventListener('click', function() {
     // Reset to default values
@@ -100,6 +127,7 @@ resetBtn.addEventListener('click', function() {
     });
     
     quantitySlider.value = 25000;
+    quantityInput.value = 25000;
     
     // Update display with a slight animation
     this.style.transform = 'scale(0.95)';

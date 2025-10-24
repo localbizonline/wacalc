@@ -35,6 +35,21 @@
                     Number of Messages
                     <span class="current-value" id="quantityDisplay">25,000</span>
                 </label>
+                
+                <div class="quantity-input-container">
+                    <input 
+                        type="number" 
+                        id="quantityInput" 
+                        min="0" 
+                        max="100000" 
+                        value="25000" 
+                        step="100"
+                        placeholder="Enter quantity"
+                        class="quantity-input"
+                    >
+                    <span class="input-suffix">messages</span>
+                </div>
+                
                 <input 
                     type="range" 
                     id="quantitySlider" 
