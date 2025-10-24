@@ -4,7 +4,8 @@ let state = {
     rate: 0.04,
     quantity: 25000,
     platformFeeRate: 0.0015,
-    botQuantity: 10000
+    botQuantity: 10000,
+    exchangeRate: 18 // USD to ZAR
 };
 
 // DOM Elements
@@ -31,6 +32,7 @@ const section2Subtotal = document.getElementById('section2Subtotal');
 
 const formula = document.getElementById('formula');
 const totalPrice = document.getElementById('totalPrice');
+const totalPriceZAR = document.getElementById('totalPriceZAR');
 const resetBtn = document.getElementById('resetBtn');
 
 // Helper function to format numbers
@@ -39,8 +41,9 @@ function formatNumber(num) {
 }
 
 // Helper function to format currency
-function formatCurrency(amount) {
-    return '$' + amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+function formatCurrency(amount, currency = 'USD') {
+    const formatted = amount.toFixed(2).replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    return currency === 'USD' ? '$' + formatted : 'R' + formatted;
 }
 
 // Update slider background gradient
@@ -90,9 +93,13 @@ function updateCalculation() {
     // Update formula
     formula.textContent = `${formatCurrency(section1Total)} + ${formatCurrency(section2Total)}`;
     
+    // Calculate ZAR amount
+    const grandTotalZAR = grandTotal * state.exchangeRate;
+    
     // Update total with animation
     totalPrice.classList.add('pulse');
     totalPrice.textContent = formatCurrency(grandTotal);
+    totalPriceZAR.textContent = formatCurrency(grandTotalZAR, 'ZAR');
     
     setTimeout(() => {
         totalPrice.classList.remove('pulse');
@@ -193,7 +200,8 @@ resetBtn.addEventListener('click', function() {
         rate: 0.04,
         quantity: 25000,
         platformFeeRate: 0.0015,
-        botQuantity: 10000
+        botQuantity: 10000,
+        exchangeRate: 18
     };
     
     // Reset UI
