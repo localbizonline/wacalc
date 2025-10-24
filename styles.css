@@ -206,6 +206,47 @@ header h1 {
     pointer-events: none;
 }
 
+/* Checkbox Container */
+.checkbox-container {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 20px;
+    background: var(--background);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid var(--border-color);
+}
+
+.checkbox-container:hover {
+    border-color: var(--primary-color);
+    background: rgba(37, 211, 102, 0.05);
+}
+
+.meta-checkbox {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    accent-color: var(--primary-color);
+    margin-right: 12px;
+}
+
+.checkbox-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    display: flex;
+    align-items: center;
+}
+
+.checkbox-note {
+    font-size: 13px;
+    color: var(--text-secondary);
+    font-style: italic;
+    margin-left: 32px;
+}
+
 /* Package Select Dropdown */
 .package-select {
     width: 100%;

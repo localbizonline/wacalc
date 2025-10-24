@@ -7,6 +7,7 @@ let state = {
     botQuantity: 10000,
     managementFee: 0,
     managementPackage: 'None',
+    ownMetaAccount: false, // If true, message costs excluded from total
     exchangeRate: 18 // USD to ZAR
 };
 
@@ -22,6 +23,7 @@ const messageCost = document.getElementById('messageCost');
 const platformFeeDisplay = document.getElementById('platformFeeDisplay');
 const platformFeeBreakdown = document.getElementById('platformFeeBreakdown');
 const section1Subtotal = document.getElementById('section1Subtotal');
+const ownMetaAccountCheckbox = document.getElementById('ownMetaAccountCheckbox');
 
 // Section 2 Elements
 const botQuantitySlider = document.getElementById('botQuantitySlider');
@@ -72,7 +74,9 @@ function updateCalculation() {
     // Section 1 calculations
     const messagesCost = state.rate * state.quantity;
     const platformFee = state.platformFeeRate * state.quantity;
-    const section1Total = messagesCost + platformFee;
+    
+    // If using own META account, exclude message cost from total
+    const section1Total = state.ownMetaAccount ? platformFee : (messagesCost + platformFee);
     
     // Section 2 calculations
     const botPlatformFee = state.platformFeeRate * state.botQuantity;
@@ -211,6 +215,12 @@ botQuantityInput.addEventListener('blur', function() {
     }
 });
 
+// Section 1: Own META Account checkbox
+ownMetaAccountCheckbox.addEventListener('change', function() {
+    state.ownMetaAccount = this.checked;
+    updateCalculation();
+});
+
 // Section 3: Management package dropdown
 managementPackageSelect.addEventListener('change', function() {
     const selectedValue = parseFloat(this.value);
@@ -242,6 +252,7 @@ resetBtn.addEventListener('click', function() {
         botQuantity: 0,
         managementFee: 0,
         managementPackage: 'None',
+        ownMetaAccount: false,
         exchangeRate: 18
     };
     
@@ -260,6 +271,7 @@ resetBtn.addEventListener('click', function() {
     botQuantityInput.value = 0;
     managementPackageSelect.value = '0';
     managementPackageName.textContent = 'None selected';
+    ownMetaAccountCheckbox.checked = false;
     
     // Update display with a slight animation
     this.style.transform = 'scale(0.95)';
