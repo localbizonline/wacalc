@@ -8,6 +8,8 @@ let state = {
     botQuantity: 10000,
     managementFee: 0,
     managementPackage: 'None',
+    setupFee: 0,
+    setupPackage: 'None',
     ownMetaAccount: false, // If true, message costs excluded from total
     exchangeRate: 18 // USD to ZAR
 };
@@ -44,6 +46,14 @@ const managementFeeBreakdown = document.getElementById('managementFeeBreakdown')
 const managementPackageName = document.getElementById('managementPackageName');
 const selectedPackage = document.getElementById('selectedPackage');
 const section3Subtotal = document.getElementById('section3Subtotal');
+
+// Section 4 Elements
+const setupPackageSelect = document.getElementById('setupPackageSelect');
+const setupFeeDisplay = document.getElementById('setupFeeDisplay');
+const setupFeeBreakdown = document.getElementById('setupFeeBreakdown');
+const setupPackageName = document.getElementById('setupPackageName');
+const selectedSetupPackage = document.getElementById('selectedSetupPackage');
+const section4Subtotal = document.getElementById('section4Subtotal');
 
 const formula = document.getElementById('formula');
 const totalPrice = document.getElementById('totalPrice');
@@ -89,8 +99,11 @@ function updateCalculation() {
     // Section 3 calculations
     const section3Total = state.managementFee;
     
+    // Section 4 calculations
+    const section4Total = state.setupFee;
+    
     // Grand total
-    const grandTotal = section1Total + section2Total + section3Total;
+    const grandTotal = section1Total + section2Total + section3Total + section4Total;
     
     // Update Section 1 displays
     quantityDisplay.textContent = formatNumber(state.quantity);
@@ -126,8 +139,14 @@ function updateCalculation() {
     selectedPackage.textContent = state.managementPackage;
     section3Subtotal.textContent = formatCurrency(section3Total);
     
+    // Update Section 4 displays
+    setupFeeDisplay.textContent = formatCurrency(state.setupFee);
+    setupFeeBreakdown.textContent = formatCurrency(state.setupFee);
+    selectedSetupPackage.textContent = state.setupPackage;
+    section4Subtotal.textContent = formatCurrency(section4Total);
+    
     // Update formula
-    formula.textContent = `${formatCurrency(section1Total)} + ${formatCurrency(section2Total)} + ${formatCurrency(section3Total)}`;
+    formula.textContent = `${formatCurrency(section1Total)} + ${formatCurrency(section2Total)} + ${formatCurrency(section3Total)} + ${formatCurrency(section4Total)}`;
     
     // Calculate ZAR amount
     const grandTotalZAR = grandTotal * state.exchangeRate;
@@ -254,6 +273,26 @@ managementPackageSelect.addEventListener('change', function() {
     updateCalculation();
 });
 
+// Section 4: Setup package dropdown
+setupPackageSelect.addEventListener('change', function() {
+    const selectedValue = parseFloat(this.value);
+    state.setupFee = selectedValue;
+    
+    // Update package name
+    if (selectedValue === 0) {
+        state.setupPackage = 'None';
+        setupPackageName.textContent = 'None selected';
+    } else if (selectedValue === 145) {
+        state.setupPackage = 'Basic Setup';
+        setupPackageName.textContent = '$145 once-off';
+    } else if (selectedValue === 285) {
+        state.setupPackage = 'Full Onboarding';
+        setupPackageName.textContent = '$285 once-off';
+    }
+    
+    updateCalculation();
+});
+
 // Reset button
 resetBtn.addEventListener('click', function() {
     // Reset to default values
@@ -266,6 +305,8 @@ resetBtn.addEventListener('click', function() {
         botQuantity: 0,
         managementFee: 0,
         managementPackage: 'None',
+        setupFee: 0,
+        setupPackage: 'None',
         ownMetaAccount: false,
         exchangeRate: 18
     };
@@ -285,6 +326,8 @@ resetBtn.addEventListener('click', function() {
     botQuantityInput.value = 0;
     managementPackageSelect.value = '0';
     managementPackageName.textContent = 'None selected';
+    setupPackageSelect.value = '0';
+    setupPackageName.textContent = 'None selected';
     ownMetaAccountCheckbox.checked = false;
     
     // Update display with a slight animation

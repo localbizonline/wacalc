@@ -178,6 +178,34 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Section 4: Once-off Setup Fee -->
+                <div class="calculator-card">
+                    <div class="section-header">
+                        <h2>Section 4: Once-off Setup Fee</h2>
+                    </div>
+
+                    <!-- Setup Package Selection -->
+                    <div class="input-section">
+                        <label class="section-label">Select Setup Package</label>
+                        <select id="setupPackageSelect" class="package-select">
+                            <option value="0">None</option>
+                            <option value="145">Basic Setup - $145 (Simple bot, 1 template)</option>
+                            <option value="285">Full Onboarding - $285 (Interactive bot, API, multi-template, training)</option>
+                        </select>
+                    </div>
+
+                    <!-- Setup Fee Display -->
+                    <div class="platform-fee-section">
+                        <div class="fee-row">
+                            <div class="fee-label">
+                                <span class="fee-title">Once-off Setup Fee</span>
+                                <span class="fee-rate" id="setupPackageName">None selected</span>
+                            </div>
+                            <div class="fee-value" id="setupFeeDisplay">$0.00</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Right Column: Total & Breakdown -->
@@ -261,8 +289,25 @@
                         </div>
                     </div>
 
+                    <!-- Section 4 Breakdown -->
+                    <div class="breakdown-subsection">
+                        <h4>Section 4: Once-off Setup Fee</h4>
+                        <div class="breakdown-row">
+                            <span>Setup Package:</span>
+                            <span id="selectedSetupPackage">None</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Once-off Fee:</span>
+                            <span id="setupFeeBreakdown">$0.00</span>
+                        </div>
+                        <div class="breakdown-subtotal">
+                            <span>Section 4 Subtotal:</span>
+                            <span id="section4Subtotal">$0.00</span>
+                        </div>
+                    </div>
+
                     <div class="breakdown-formula">
-                        <span id="formula">$1,037.50 + $15.00 + $0.00</span>
+                        <span id="formula">$1,037.50 + $15.00 + $0.00 + $0.00</span>
                     </div>
                 </div>
 
