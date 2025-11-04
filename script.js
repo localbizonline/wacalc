@@ -10,6 +10,8 @@ let state = {
     managementPackage: 'None',
     setupFee: 0,
     setupPackage: 'None',
+    supportFee: 0,
+    supportPackage: 'Basic Support',
     ownMetaAccount: false, // If true, message costs excluded from total
     exchangeRate: 18 // USD to ZAR
 };
@@ -55,9 +57,19 @@ const setupPackageName = document.getElementById('setupPackageName');
 const selectedSetupPackage = document.getElementById('selectedSetupPackage');
 const section4Subtotal = document.getElementById('section4Subtotal');
 
+// Section 5 Elements
+const supportPackageSelect = document.getElementById('supportPackageSelect');
+const supportFeeDisplay = document.getElementById('supportFeeDisplay');
+const supportFeeBreakdown = document.getElementById('supportFeeBreakdown');
+const supportPackageName = document.getElementById('supportPackageName');
+const selectedSupportLevel = document.getElementById('selectedSupportLevel');
+const section5Subtotal = document.getElementById('section5Subtotal');
+
 const formula = document.getElementById('formula');
-const totalPrice = document.getElementById('totalPrice');
-const totalPriceZAR = document.getElementById('totalPriceZAR');
+const monthlyPrice = document.getElementById('monthlyPrice');
+const monthlyPriceZAR = document.getElementById('monthlyPriceZAR');
+const onceOffPrice = document.getElementById('onceOffPrice');
+const onceOffPriceZAR = document.getElementById('onceOffPriceZAR');
 const resetBtn = document.getElementById('resetBtn');
 
 // Helper function to format numbers
@@ -99,11 +111,17 @@ function updateCalculation() {
     // Section 3 calculations
     const section3Total = state.managementFee;
     
-    // Section 4 calculations
+    // Section 4 calculations (Once-off)
     const section4Total = state.setupFee;
     
-    // Grand total
-    const grandTotal = section1Total + section2Total + section3Total + section4Total;
+    // Section 5 calculations
+    const section5Total = state.supportFee;
+    
+    // Monthly total (Sections 1, 2, 3, 5)
+    const monthlyTotal = section1Total + section2Total + section3Total + section5Total;
+    
+    // Once-off total (Section 4)
+    const onceOffTotal = section4Total;
     
     // Update Section 1 displays
     quantityDisplay.textContent = formatNumber(state.quantity);
@@ -145,19 +163,30 @@ function updateCalculation() {
     selectedSetupPackage.textContent = state.setupPackage;
     section4Subtotal.textContent = formatCurrency(section4Total);
     
+    // Update Section 5 displays
+    supportFeeDisplay.textContent = formatCurrency(state.supportFee);
+    supportFeeBreakdown.textContent = formatCurrency(state.supportFee);
+    selectedSupportLevel.textContent = state.supportPackage;
+    section5Subtotal.textContent = formatCurrency(section5Total);
+    
     // Update formula
-    formula.textContent = `${formatCurrency(section1Total)} + ${formatCurrency(section2Total)} + ${formatCurrency(section3Total)} + ${formatCurrency(section4Total)}`;
+    formula.textContent = `Monthly: ${formatCurrency(monthlyTotal)} | Once-off: ${formatCurrency(onceOffTotal)}`;
     
-    // Calculate ZAR amount
-    const grandTotalZAR = grandTotal * state.exchangeRate;
+    // Calculate ZAR amounts
+    const monthlyTotalZAR = monthlyTotal * state.exchangeRate;
+    const onceOffTotalZAR = onceOffTotal * state.exchangeRate;
     
-    // Update total with animation
-    totalPrice.classList.add('pulse');
-    totalPrice.textContent = formatCurrency(grandTotal);
-    totalPriceZAR.textContent = formatCurrency(grandTotalZAR, 'ZAR');
+    // Update monthly total with animation
+    monthlyPrice.classList.add('pulse');
+    monthlyPrice.textContent = formatCurrency(monthlyTotal);
+    monthlyPriceZAR.textContent = formatCurrency(monthlyTotalZAR, 'ZAR');
+    
+    // Update once-off total
+    onceOffPrice.textContent = formatCurrency(onceOffTotal);
+    onceOffPriceZAR.textContent = formatCurrency(onceOffTotalZAR, 'ZAR');
     
     setTimeout(() => {
-        totalPrice.classList.remove('pulse');
+        monthlyPrice.classList.remove('pulse');
     }, 500);
     
     // Update slider backgrounds
@@ -293,6 +322,26 @@ setupPackageSelect.addEventListener('change', function() {
     updateCalculation();
 });
 
+// Section 5: Support package dropdown
+supportPackageSelect.addEventListener('change', function() {
+    const selectedValue = parseFloat(this.value);
+    state.supportFee = selectedValue;
+    
+    // Update package name
+    if (selectedValue === 0) {
+        state.supportPackage = 'Basic Support';
+        supportPackageName.textContent = 'Basic Support - Free';
+    } else if (selectedValue === 45) {
+        state.supportPackage = 'Priority Support';
+        supportPackageName.textContent = '$45/month';
+    } else if (selectedValue === 109) {
+        state.supportPackage = 'Enhanced Support';
+        supportPackageName.textContent = '$109/month';
+    }
+    
+    updateCalculation();
+});
+
 // Reset button
 resetBtn.addEventListener('click', function() {
     // Reset to default values
@@ -307,6 +356,8 @@ resetBtn.addEventListener('click', function() {
         managementPackage: 'None',
         setupFee: 0,
         setupPackage: 'None',
+        supportFee: 0,
+        supportPackage: 'Basic Support',
         ownMetaAccount: false,
         exchangeRate: 18
     };
@@ -328,6 +379,8 @@ resetBtn.addEventListener('click', function() {
     managementPackageName.textContent = 'None selected';
     setupPackageSelect.value = '0';
     setupPackageName.textContent = 'None selected';
+    supportPackageSelect.value = '0';
+    supportPackageName.textContent = 'Basic Support - Free';
     ownMetaAccountCheckbox.checked = false;
     
     // Update display with a slight animation

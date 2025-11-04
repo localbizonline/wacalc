@@ -206,15 +206,49 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Section 5: Reachmax Support -->
+                <div class="calculator-card">
+                    <div class="section-header">
+                        <h2>Section 5: Reachmax Support</h2>
+                    </div>
+
+                    <!-- Support Package Selection -->
+                    <div class="input-section">
+                        <label class="section-label">Select Support Level</label>
+                        <select id="supportPackageSelect" class="package-select">
+                            <option value="0">Basic Support - Free (Email, minor changes)</option>
+                            <option value="45">Priority Support - $45/month (WhatsApp, urgent issues)</option>
+                            <option value="109">Enhanced Support - $109/month (Call support, bots, templates)</option>
+                        </select>
+                    </div>
+
+                    <!-- Support Fee Display -->
+                    <div class="platform-fee-section">
+                        <div class="fee-row">
+                            <div class="fee-label">
+                                <span class="fee-title">Monthly Support Fee</span>
+                                <span class="fee-rate" id="supportPackageName">Basic Support - Free</span>
+                            </div>
+                            <div class="fee-value" id="supportFeeDisplay">$0.00</div>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Right Column: Total & Breakdown -->
             <div class="right-column">
                 <!-- Total Price Display -->
                 <div class="total-section">
-                    <div class="total-label">Total Cost</div>
-                    <div class="total-price" id="totalPrice">$1,052.50</div>
-                    <div class="total-price-zar" id="totalPriceZAR">R18,945.00</div>
+                    <div class="total-label">Monthly Recurring Cost</div>
+                    <div class="total-price" id="monthlyPrice">$1,052.50</div>
+                    <div class="total-price-zar" id="monthlyPriceZAR">R18,945.00</div>
+                </div>
+
+                <div class="total-section total-section-secondary">
+                    <div class="total-label">Once-off Setup Cost</div>
+                    <div class="total-price" id="onceOffPrice">$0.00</div>
+                    <div class="total-price-zar" id="onceOffPriceZAR">R0.00</div>
                     <div class="exchange-rate-note">Exchange rate: $1 = R18</div>
                 </div>
 
@@ -306,8 +340,25 @@
                         </div>
                     </div>
 
+                    <!-- Section 5 Breakdown -->
+                    <div class="breakdown-subsection">
+                        <h4>Section 5: Reachmax Support</h4>
+                        <div class="breakdown-row">
+                            <span>Support Level:</span>
+                            <span id="selectedSupportLevel">Basic Support</span>
+                        </div>
+                        <div class="breakdown-row">
+                            <span>Monthly Fee:</span>
+                            <span id="supportFeeBreakdown">$0.00</span>
+                        </div>
+                        <div class="breakdown-subtotal">
+                            <span>Section 5 Subtotal:</span>
+                            <span id="section5Subtotal">$0.00</span>
+                        </div>
+                    </div>
+
                     <div class="breakdown-formula">
-                        <span id="formula">$1,037.50 + $15.00 + $0.00 + $0.00</span>
+                        <span id="formula">Monthly: $0.00 | Once-off: $0.00</span>
                     </div>
                 </div>
 

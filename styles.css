@@ -472,6 +472,10 @@ header h1 {
     box-shadow: var(--shadow-lg);
 }
 
+.total-section-secondary {
+    background: linear-gradient(135deg, var(--secondary-color) 0%, #0F7D74 100%);
+}
+
 @keyframes slideUp {
     from {
         opacity: 0;
